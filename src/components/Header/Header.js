@@ -4,6 +4,7 @@ import '../Header.css'
 const Header = () => {
   return (
     <div class='header'>
+      <h1>emajon</h1>
       <img src={logo} alt="" />
     </div>
   );
