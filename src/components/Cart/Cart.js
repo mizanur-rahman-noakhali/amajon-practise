@@ -30,7 +30,7 @@ else if (total > 0){
  }
   return (
     <div>
-      <h4> Order summary</h4>
+      <h4 className='bg-danger'> Order summary</h4>
       <p> Item ordered:{cart.length}</p>
       <p> product price:{formatNumber(total)}</p>
       <p><small>shipping cost:{shipping}</small></p>
