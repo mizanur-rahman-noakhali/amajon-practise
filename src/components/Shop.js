@@ -3,6 +3,7 @@ import fakeData from '../fakeData';
 import './Shop.css';
 import Product from './Product/Product';
 import Cart from './Cart/Cart';
+import { addToDb } from '../utilities/fakedb';
 const Shop = () => {
  // console.log(fakeData);
  
@@ -15,6 +16,7 @@ const Shop = () => {
   
   const newCart=[...cart,product];
   setCart(newCart)
+  addToDb(product.key);
  }
  
  return (
@@ -23,6 +25,7 @@ const Shop = () => {
         {
           Products.map(product=>
              <Product
+             key={product.key}
              showAddToCard={true}
               product={product}
                 handleAddProduct={handleAddProduct}>
