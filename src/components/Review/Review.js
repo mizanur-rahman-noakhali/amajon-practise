@@ -4,39 +4,36 @@ import fakeData from '../../fakeData';
 import ReviewItem from '../ReviewItem/ReviewItem';
 
 const Review = () => {
-  const [cart,setCart]=useState([]);
-
-  const removeProduct=(productKey)=>{
+           const [cart, setCart]= useState([]);    
+           const removeProduct=(productKey)=>{
     
-    const newCart=cart.filter(product=>product.Key !== productKey);
-    setCart(newCart);
-    removeFromDb(productKey);
+            const newCart=cart.filter(product=>product.key !== productKey);
+            setCart(newCart);
+            removeFromDb(productKey);
+        
+          }     
+           
+           useEffect(()=> {
+            //cart
+            const saveCart=getShoppingCart();
+             const productKeys=Object.keys(saveCart);
 
-  }
-       useEffect( () => {
-    //cart
-    const savedCart=getShoppingCart();
-    const productKeys=Object.keys(savedCart);
+             const cartProduct = productKeys.map(key=> {
+              const product=fakeData.find(product=>product.key ===key);
+              product.quantity=saveCart[key];
+              return product;
 
-
-    const cartProducts=productKeys.map(key => {
-      const product=fakeData.find(product=> product.key===key);
-      product.quantity=savedCart[key];
-      
-      return product;
-    } )
-    setCart(cartProducts);
-  },[])
-  return (
+             });
+            setCart(cartProduct);
+           },[])
+  return ( 
     <div>
-      
-      
       {
         cart.map(product=>
         <ReviewItem
         key={product.key}
          product={product}
-          removeProduct={removeProduct}
+         removeProduct={removeProduct}
           >
          </ReviewItem>)
       }
