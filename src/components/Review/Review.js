@@ -6,18 +6,20 @@ import ReviewItem from '../ReviewItem/ReviewItem';
 const Review = () => {
   const [cart,setCart]=useState([]);
 
-  const removeProduct=(productkey)=>{
+  const removeProduct=(productKey)=>{
     
-    const newCart=cart.filter(product=>product.key !== productkey);
+    const newCart=cart.filter(product=>product.Key !== productKey);
     setCart(newCart);
-    removeFromDb(productkey);
+    removeFromDb(productKey);
 
   }
        useEffect( () => {
     //cart
     const savedCart=getShoppingCart();
     const productKeys=Object.keys(savedCart);
-    const cartProducts=productKeys.map(key=> {
+
+
+    const cartProducts=productKeys.map(key => {
       const product=fakeData.find(product=> product.key===key);
       product.quantity=savedCart[key];
       
