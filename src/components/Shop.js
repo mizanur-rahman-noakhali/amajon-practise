@@ -3,8 +3,9 @@ import fakeData from '../fakeData';
 import './Shop.css';
 import Product from './Product/Product';
 import Cart from './Cart/Cart';
-import { addToDb } from '../utilities/fakedb';
+import { addToDb, getShoppingCart } from '../utilities/fakedb';
 import Review from './Review/Review';
+import { useEffect } from 'react';
 const Shop = () => {
  // console.log(fakeData);
  
@@ -12,6 +13,18 @@ const Shop = () => {
 
   const [Products,setProducts] = useState(first10);
   const [cart,setCart] = useState([]);
+
+  useEffect(()=>{
+         const savedCart=getShoppingCart();
+         const productKeys=Object.keys(savedCart);
+         const previousCart=productKeys.map(existingKey=>{
+          const product=fakeData.find(product=> product.key===existingKey);
+          product.quantity=savedCart[existingKey];
+          return product;
+
+         })
+         setCart(previousCart);
+  },[])
  
  const handleAddProduct =(product) =>{
   const toBeAddedKey=product.key;

@@ -29,7 +29,7 @@ const Review = () => {
             setCart(cartProduct);
            },[])
   return ( 
-   <><h1> cart:{cart.length}</h1>
+   <>
    <div className='twin-container'>
       <div className='product-container'>
         {cart.map(product => <ReviewItem
