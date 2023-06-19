@@ -6,6 +6,8 @@ import Cart from './Cart/Cart';
 import { addToDb, getShoppingCart } from '../utilities/fakedb';
 import Review from './Review/Review';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+
 const Shop = () => {
  // console.log(fakeData);
  
@@ -62,7 +64,11 @@ else{
     </div>
     
     <div className="cart-container">
-      <Cart cart={cart}></Cart>
+      <Cart cart={cart}>
+      <Link to='/review'>
+      <button className='main-button'> Review Order</button>
+      </Link>
+      </Cart>
       
     </div>
     </div>

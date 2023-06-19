@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 const Cart = (props) => {
   const cart=props.cart;
@@ -39,9 +39,9 @@ else if (total > 0){
       <p>TAX+VAT:{tax}</p>
       <p> Total Price:{grandTotal}</p>
       <br/>
-      <Link to='/review'>
-      <button className='main-button'> Review Order</button>
-      </Link>
+      {
+        props.children
+      }
     </div>
   );
 };
