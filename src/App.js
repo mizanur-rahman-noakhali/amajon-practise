@@ -14,6 +14,7 @@ import NotFound from './components/NotFound/NotFound';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import Shipment from './components/Shipment/Shipment';
 import Login from './components/Login/Login';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 export const UserContext = createContext ();
 
@@ -36,9 +37,9 @@ const [loggedInUser,setLoggedInUser] = useState ({});
           <Route path='/inventory'>
             <Inventory></Inventory>
           </Route>
-          <Route path='/Shipment'>
+          <PrivateRoute path='/Shipment'>
             <Shipment></Shipment>
-          </Route>
+          </PrivateRoute>
           <Route path='/Login'>
             <Login></Login>
           </Route>
