@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Login.css';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import firebaseConfig from './firebase.config';
+import { UserContext } from '../../App';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -65,6 +66,8 @@ function Login() {
     });
   }
 
+  const [loggedInUser,setLoggedInUser]=useContext(UserContext);
+
   const handleBlur = (e) => {
     let isFieldValid = true;
     if(e.target.name === 'email'){
@@ -89,6 +92,7 @@ function Login() {
         newUserInfo.error = '';
         newUserInfo.success = true;
         setUser(newUserInfo);
+        setLoggedInUser(newUserInfo);
         updateUserName(user.name);
       })
       .catch( error => {
