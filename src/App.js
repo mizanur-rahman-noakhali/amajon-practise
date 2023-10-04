@@ -24,9 +24,10 @@ const [loggedInUser,setLoggedInUser] = useState ({});
 
   return (
     <UserContext.Provider value= {[loggedInUser,setLoggedInUser]}>
-      <h3>email {loggedInUser.email}</h3>
-      <Header></Header>
+      <h3> email {loggedInUser.email}</h3>
+     
       <Router>
+      <Header></Header>
         <Switch>
           <Route path='/shop'>
           <Shop></Shop> 
