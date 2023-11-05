@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getShoppingCart ,removeFromDb,deleteShoppingCart} from '../../utilities/fakedb';
+import { getStoredCart ,removeFromDb,deleteShoppingCart} from '../../utilities/fakedb';
 import fakeData from '../../fakeData';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import Cart from '../Cart/Cart';
@@ -23,19 +23,29 @@ const Review = () => {
         
           }     
            
-           useEffect(()=> {
-            //cart
-            const saveCart=getShoppingCart();
-             const productKeys=Object.keys(saveCart);
-
-             const cartProduct = productKeys.map(key=> {
-              const product=fakeData.find(product=>product.key ===key);
-              product.quantity=saveCart[key];
-              return product;
-
-             });
-            setCart(cartProduct);
-           },[])
+          useEffect(() => {
+            // Cart
+            const saveCart = getStoredCart();
+            const productKeys = Object.keys(saveCart);
+          
+            const cartProduct = productKeys.map(key => {
+              const product = fakeData.find(product => product.key === key);
+          
+              if (product) {
+                product.quantity = saveCart[key];
+                return product;
+              }
+          
+              return null; // Handle non-existent products
+            });
+          
+            // Filter out null values from cartProduct
+            const filteredCart = cartProduct.filter(product => product !== null);
+          
+            setCart(filteredCart);
+          }, []);
+          
+            
            let thankYou;
            if(orderPlaced){
             thankYou=<img src={happyImage} alt="" />
